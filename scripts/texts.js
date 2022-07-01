@@ -79,7 +79,7 @@ function addNewText() {
     
     const json = '{"category":"' + catName + '", "name":"' + name + '", "text":"' + text + '", "color":"' + color + '"}';
 
-    localStorage.setItem(json, text);
+    localStorage.setItem(json, "true");
     document.location.href = "../categories.html";
     history.back();
 }
