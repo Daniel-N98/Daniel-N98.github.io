@@ -15,7 +15,7 @@ function addCategory() {
     localStorage.setItem("categories " + name.replaceAll(" ", "_"), json);
 
     //localStorage.setItem(name.replace(" ", "_"), "category");
-    document.location.href = "../html/categories.html";
+    document.location.href = "../categories.html";
     createButtons();
 }
 
@@ -51,5 +51,5 @@ function createButtons() {
 }
 
 function addButtonCookie(button) {
-    window.location.href = '../html/categoryView.html?category=' + button.textContent.toLowerCase().replace(" ", "_");
+    window.location.href = '../categoryView.html?category=' + button.textContent.toLowerCase().replace(" ", "_");
 }

@@ -10,7 +10,7 @@ function openCategory() {
 
 function loadButtons(category) {
     const storage = {...localStorage};
-    document.getElementById("add-new").setAttribute("onclick", "window.location.href='../html/newText.html?category=" + category + "'")
+    document.getElementById("add-new").setAttribute("onclick", "window.location.href='../newText.html?category=" + category + "'")
     for (let element in storage) {
         if (element.includes("categories ")) {
             continue;
@@ -80,7 +80,7 @@ function addNewText() {
     const json = '{"category":"' + catName + '", "name":"' + name + '", "text":"' + text + '", "color":"' + color + '"}';
 
     localStorage.setItem(json, text);
-    document.location.href = "../html/categories.html";
+    document.location.href = "../categories.html";
     history.back();
 }
 
