@@ -1,0 +1,55 @@
+#categories-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input, input {
+    text-align: center;
+    color: white;
+    font-size: 15px;
+}
+
+input:focus {
+    outline: none;
+}
+
+.input p {
+    color: white;
+    margin: 5px 0;
+}
+
+.input input {
+    background: none;
+    border: 2px solid #E7AB79;
+    border-radius: 45px;
+    width: 380px;
+    height: 41px;
+    margin: 15px;
+}
+
+#categories-container button {
+    width: 140px !important;
+    height: 40px !important;
+}
+
+#cat_name::placeholder {
+    color: rgb(255, 47, 47);
+    text-align: center;
+}
+
+@media screen and (max-width: 420px) {
+    .input input {
+        width: 200px;
+        height: 35px
+    }
+
+    .input h3 {
+        font-size: 18px !important;
+    }
+
+    .input p {
+        font-size: 11px !important;
+    }
+}

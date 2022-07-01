@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/newCategory.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/categories.css">
+    <title>Copy and Paste Tool</title>
+</head>
+<body onload="updateName();">
+<div class="header">
+    <h3 id="logo">Logo<span>Text</span></h3>
+    <h2 id="title">Copy and Paste Tool</h2>
+</div>
+<div id="bg-container">
+    <h3>Add New Text to <span id="cat_name" style="color: #4C3A51"></span></h3>
+    <div id="option-buttons">
+        <button class="button" onclick="window.location.href='../html/categories.html'" id="back">Back</button>
+    </div>
+    <div id="categories-container">
+        <div class="input">
+            <h3>Text Name</h3>
+            <p>The name to be displayed on the button to hint at the Text it copies</p>
+            <input type="text" name="text_name" id="text_name">
+        </div>
+        <div class="input">
+            <h3>Text To Copy</h3>
+            <p>The text to be copied to clipboard upon clicking the button</p>
+            <input type="text" name="text_copy" id="text_copy">
+        </div>
+        <div class="input">
+            <h3>Button Color</h3>
+            <p>The color of this particular button </p>
+            <input type="text" name="text_but_color" id="text_but_color">
+        </div>
+        <button class="button" onclick="addNewText()">Confirm</button>
+    </div>
+</div>
+</body>
+<script src="../scripts/texts.js"></script>
+</html>
