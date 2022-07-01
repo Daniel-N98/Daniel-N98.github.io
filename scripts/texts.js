@@ -10,15 +10,15 @@ function openCategory() {
 }
 
 function loadButtons() {
-    // Copies the localStorage into an object
+    // Copies the localStorage into an object.
     const storage = {...localStorage};
     for (let key in storage) {
-        // If the key includes "categories", continue to the next iteration
+        // If the key includes "categories", continue to the next iteration.
         if (key.includes("categories"))continue;
         
-        // Parse the value of key into a JSON object
+        // Parse the value of key into a JSON object.
         const jsonObj = JSON.parse(key);
-        // Continues if the JSON obj does not have a "category" property, or the category value is not the correct category
+        // Continues if the JSON obj does not have a "category" property, or the category value is not the correct category.
         if (!(jsonObj.hasOwnProperty("category")) || jsonObj["category"] !== getCatName()) continue;
         
         // Defines JSON objects
@@ -26,7 +26,7 @@ function loadButtons() {
         const text = jsonObj.text;
         const color = jsonObj.color;
 
-        // Creates and adds a button to the "categories-container" element
+        // Creates and adds a button to the "categories-container" element.
         createButton(name, text, color);
     }
 }
