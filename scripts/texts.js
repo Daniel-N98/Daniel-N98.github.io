@@ -1,82 +1,111 @@
 function openCategory() {
-    const url = window.location.search;
-    const urlParams = new URLSearchParams(url);
-
-    const category = urlParams.get('category');
+    const category = getCatName();
+    // Get the first child node of the #bg-container element
     const titleElem = document.querySelector('#bg-container').childNodes[1];
-    titleElem.textContent += category.replaceAll("_", " ");
-    loadButtons(category);
+    // Set the title to that of the category
+    titleElem.textContent += category;
+    document.getElementById("add-new").setAttribute("onclick", "window.location.href='../newText.html?category=" + category + "'")
+    // Iterates through the users local storage, and calls for a button to be created for each text
+    loadButtons();
 }
 
-function loadButtons(category) {
+function loadButtons() {
+    // Copies the localStorage into an object
     const storage = {...localStorage};
-    document.getElementById("add-new").setAttribute("onclick", "window.location.href='../newText.html?category=" + category + "'")
-    for (let element in storage) {
-        if (element.includes("categories ")) {
-            continue;
-        }
-        const jsonObj = JSON.parse(element);
-        if (jsonObj.hasOwnProperty("category") && jsonObj["category"] === getCatName()) {
-            console.log(element);
-            const name = jsonObj.name;
-            const text = jsonObj.text;
-            const color = jsonObj.color;
+    for (let key in storage) {
+        // If the key includes "categories", continue to the next iteration
+        if (key.includes("categories"))continue;
+        
+        // Parse the value of key into a JSON object
+        const jsonObj = JSON.parse(key);
+        // Continues if the JSON obj does not have a "category" property, or the category value is not the correct category
+        if (!(jsonObj.hasOwnProperty("category")) || jsonObj["category"] !== getCatName()) continue;
+        
+        // Defines JSON objects
+        const name = jsonObj.name;
+        const text = jsonObj.text;
+        const color = jsonObj.color;
 
-            const button = document.createElement("button");
-
-            button.textContent = name;
-            button.style.backgroundColor = color;
-            button.setAttribute("id", name.replaceAll(" ", "_"));
-            button.setAttribute("class", "button");
-            button.setAttribute("onclick", "copyText('" + text + "')");
-
-            document.getElementById("categories-container").appendChild(button);
-        }
+        // Creates and adds a button to the "categories-container" element
+        createButton(name, text, color);
     }
 }
 
-function updateName() {
-    document.getElementById("cat_name").textContent = getCatName();
+function createButton(name, text, color){
+    // Creates a new button element
+    const button = document.createElement("button");
+
+    // Sets the text on the button equal to the name
+    button.textContent = name;
+    // Sets the background color of the button to the one stored, or "" if null
+    button.style.backgroundColor = color;
+    // Add an "onclick" attribute to the button to copy the text upon clocking
+    button.setAttribute("onclick", "copyText('" + text + "')");
+    // Set the ID to the name, with "_" replacing spaces
+    button.setAttribute("id", name.replaceAll(" ", "_"));
+    // Add the button class
+    button.setAttribute("class", "button");
+
+    // Adds the button to the categories container element
+    document.getElementById("categories-container").appendChild(button);
 }
 
-async function copyText(button) {
+async function copyText(text) {
+    // Create a new input element to hold the text being copied
     const input = document.createElement("input");
-    input.value = button;
+    // Set the inputs text value equal to the text being copied
+    input.value = text;
+    // Set the position as "fixed"
     input.style.position = "fixed";
+    // Move the element far off screen as not to be seen by the user
     input.style.top = "-2000px";
+    // Append the child node
     document.body.appendChild(input);
+
+    // Displays a text indication that text has attempted to be copied
+    const hiddenPar = document.getElementById("hidden-indication");
+    // Displays the result of the operation, failed/succeeded
+    const hiddenStatus = document.getElementById("indication-cat");
 
     input.select();
     try {
-        const res = await Promise.resolve(document.execCommand("copy"));
-        document.body.removeChild(input);
-        return res;
+        // Attempt to copy the text to the users clipboard
+        document.execCommand("copy");
+        // Alter the result to indicate a successful copy
+        hiddenStatus.textContent = "Succeded";
+        // Update the color of the result to a shade of green
+        hiddenStatus.style.color = "#00ff40";
       } catch (err) {
-        return Promise.resolve(false);
+        // Red color is applied by default, so no need to set it here to indicate a fail
+        // Alter the result to indicate a failed copy
+        hiddenStatus.textContent = "Failed!";
       }
+      // Remove the child node we appended
+      document.body.removeChild(input);
+      // Remove the hidden attribute so the text indication is shown
+      hiddenPar.hidden = false
+      setTimeout(function(){
+        // Removes the text indication after 5 seconds
+        hiddenPar.hidden = true;
+    },5000);
 }
 
 function addNewText() {
+    const catName = getCatName();
     const name = document.getElementById("text_name").value;
-    
-    if (name.length === 0) {
-        document.getElementById("text_name").setAttribute("placeholder", "This field is required");
-        return;
-    }
     const text = document.getElementById("text_copy").value;
-
-    if (text.length === 0) {
+    let color = document.getElementById("text_but_color").value;
+    
+    if (name.length === 0 || text.length === 0) {
+        document.getElementById("text_name").setAttribute("placeholder", "This field is required");
         document.getElementById("text_copy").setAttribute("placeholder", "This field is required");
         return;
     }
 
-    let color = document.getElementById("text_but_color").value;
     if (color.length === 0){
         color = "";
     }
 
-    const catName = getCatName();
-    
     const json = '{"category":"' + catName + '", "name":"' + name + '", "text":"' + text + '", "color":"' + color + '"}';
 
     localStorage.setItem(json, "true");
