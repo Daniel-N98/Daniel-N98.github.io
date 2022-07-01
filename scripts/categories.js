@@ -7,7 +7,7 @@ function addCategory() {
         return;
     }
     let color = document.getElementById("cat_but_color").value;
-    if (color.length === 0){
+    if (color.length === 0) {
         color = "";
     }
     const json = '{"cat":"' + name + '", "color":"' + color + '"}';
@@ -23,7 +23,7 @@ function removeCategory(name) {
 }
 
 // Used in development phase to manually clear LocalStorage
-function deleteStorage(){
+function deleteStorage() {
     localStorage.clear();
     location.reload();
 }
@@ -31,8 +31,8 @@ function deleteStorage(){
 function createButtons() {
     const storage = {...localStorage};
     for (let element in storage) {
-        if (element.includes("category"))continue;
-        
+        if (element.includes("category")) continue;
+
         const json = storage[element];
         const parsed = JSON.parse(json);
         let name = parsed["cat"];

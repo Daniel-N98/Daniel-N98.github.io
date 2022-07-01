@@ -1,3 +1,6 @@
+/**
+ * Sets the title to the container to that of the category the user is in
+ */
 function openCategory() {
     const category = getCatName();
     // Get the first child node of the #bg-container element
@@ -9,18 +12,28 @@ function openCategory() {
     loadButtons();
 }
 
+/**
+ * Updates the title of the container to indicate which category a text is being added to
+ */
+function updateName() {
+    document.getElementById("cat_name").textContent = getCatName();
+}
+
+/**
+ * Create buttons from the users localStorage.
+ */
 function loadButtons() {
     // Copies the localStorage into an object.
     const storage = {...localStorage};
     for (let key in storage) {
         // If the key includes "categories", continue to the next iteration.
-        if (key.includes("categories"))continue;
-        
+        if (key.includes("categories")) continue;
+
         // Parse the value of key into a JSON object.
         const jsonObj = JSON.parse(key);
         // Continues if the JSON obj does not have a "category" property, or the category value is not the correct category.
         if (!(jsonObj.hasOwnProperty("category")) || jsonObj["category"] !== getCatName()) continue;
-        
+
         // Defines JSON objects
         const name = jsonObj.name;
         const text = jsonObj.text;
@@ -31,7 +44,13 @@ function loadButtons() {
     }
 }
 
-function createButton(name, text, color){
+/**
+ * Create a button from a name, text, and color
+ * @param {*} name to display on the button
+ * @param {*} text to be copied upon clicking the button
+ * @param {*} color color of the button
+ */
+function createButton(name, text, color) {
     // Creates a new button element
     const button = document.createElement("button");
 
@@ -50,6 +69,10 @@ function createButton(name, text, color){
     document.getElementById("categories-container").appendChild(button);
 }
 
+/**
+ * Copy the text parameter to the users clipboard, and display a visual indication.
+ * @param {*} text
+ */
 async function copyText(text) {
     // Create a new input element to hold the text being copied
     const input = document.createElement("input");
@@ -75,56 +98,68 @@ async function copyText(text) {
         hiddenStatus.textContent = "Succeded";
         // Update the color of the result to a shade of green
         hiddenStatus.style.color = "#00ff40";
-      } catch (err) {
+    } catch (err) {
         // Red color is applied by default, so no need to set it here to indicate a fail
         // Alter the result to indicate a failed copy
         hiddenStatus.textContent = "Failed!";
-      }
-      // Remove the child node we appended
-      document.body.removeChild(input);
-      // Remove the hidden attribute so the text indication is shown
-      hiddenPar.hidden = false
-      setTimeout(function(){
+    }
+    // Remove the child node we appended
+    document.body.removeChild(input);
+    // Remove the hidden attribute so the text indication is shown
+    hiddenPar.hidden = false
+    setTimeout(function () {
         // Removes the text indication after 5 seconds
         hiddenPar.hidden = true;
-    },5000);
+    }, 5000);
 }
 
+/**
+ * Adds a new text to the category the user is in.
+ * Stores data as a JSON string, within the users localStorage.
+ *
+ *
+ * @returns if name or text input fields are empty
+ */
 function addNewText() {
+    // Define the category name
     const catName = getCatName();
+
+    // Define all values for the new text button from the user input fields
     const name = document.getElementById("text_name").value;
     const text = document.getElementById("text_copy").value;
     let color = document.getElementById("text_but_color").value;
-    
+
+    // Add placeholders if name, or text is empty indicating they are required fields
     if (name.length === 0 || text.length === 0) {
         document.getElementById("text_name").setAttribute("placeholder", "This field is required");
         document.getElementById("text_copy").setAttribute("placeholder", "This field is required");
         return;
     }
 
-    if (color.length === 0){
+    // Set color equal to an empty string if the string is undefined
+    if (color === undefined) {
         color = "";
     }
 
+    // Create the JSON strong from the text button values
     const json = '{"category":"' + catName + '", "name":"' + name + '", "text":"' + text + '", "color":"' + color + '"}';
 
+    // Store the JSON string in users localStorage. Value is irrelevant 
     localStorage.setItem(json, "true");
-    document.location.href = "../categories.html";
+    // Returns to the previous page
     history.back();
 }
 
+/**
+ * Returns the category name from the URL parameter ("category");
+ * @returns category name
+ */
 function getCatName() {
+    // Define the current window URL
     const url = window.location.search;
     const urlParams = new URLSearchParams(url);
+    // Get the value of key "category"
     const category = urlParams.get('category');
+    // Return the key without "_" characters
     return category.replace("_", " ");
 }
-
-/**
- * To-Do
- * Implement delete/edit features
- * Implement visual indication that a text has been copied (Mini auto closing pop up, button change etc)
- * Make categories/categoryView pages more easily recognisable
- * Implement settings, Account and signout functionality
- * Possibly remove Account/Signout buttons as it's not really needed since we're using LocalStorage.
- */
