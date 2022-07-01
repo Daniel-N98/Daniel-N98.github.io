@@ -136,6 +136,12 @@ function addNewText() {
         return;
     }
 
+    if (!checkName(name)){
+        document.getElementById("text_name").setAttribute("placeholder", "Text Name already exists");
+        document.getElementById("text_name").value = "";
+        return;
+    }
+
     // Set color equal to an empty string if the string is undefined
     if (color === undefined) {
         color = "";
@@ -148,6 +154,23 @@ function addNewText() {
     localStorage.setItem(json, "true");
     // Returns to the previous page
     history.back();
+}
+
+function checkName(textName){
+    const catName = getCatName();
+    const storage = {...localStorage};
+    for (let key in storage){
+        if (key.includes("categories")) continue;
+
+        // Parse the value of key into a JSON object.
+        const jsonObj = JSON.parse(key);
+        // Continues if the JSON obj does not have a "category" property, or the category value is not the correct category.
+        if (!(jsonObj.hasOwnProperty("category")) || jsonObj["category"] !== catName) continue;
+        if (jsonObj.name === textName){
+            return false;
+        }
+    }
+    return true;
 }
 
 /**

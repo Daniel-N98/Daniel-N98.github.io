@@ -10,6 +10,11 @@ function addCategory() {
     if (color.length === 0) {
         color = "";
     }
+    if (!checkCategory(name)){
+        document.getElementById("cat_name").setAttribute("placeholder", "Category Name already exists");
+        document.getElementById("cat_name").value = "";
+        return;
+    }
     const json = '{"cat":"' + name + '", "color":"' + color + '"}';
 
     localStorage.setItem("categories " + name.replaceAll(" ", "_"), json);
@@ -26,6 +31,20 @@ function removeCategory(name) {
 function deleteStorage() {
     localStorage.clear();
     location.reload();
+}
+
+function checkCategory(categoryName){
+    const storage = {...localStorage};
+    for (let key in storage){
+        if (key.includes("categories ")){
+            // Parse the value of key into a JSON object.
+            const jsonObj = JSON.parse(storage[key]);
+            if (jsonObj.cat === categoryName){
+                return false;
+            }
+        }
+    }
+        return true;
 }
 
 function createButtons() {
