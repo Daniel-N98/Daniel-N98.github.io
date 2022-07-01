@@ -34,7 +34,7 @@ input:focus {
     height: 40px !important;
 }
 
-#cat_name::placeholder {
+.name::placeholder {
     color: rgb(255, 47, 47);
     text-align: center;
 }
