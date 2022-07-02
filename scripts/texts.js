@@ -7,8 +7,9 @@ function openCategory() {
     const titleElem = document.querySelector('#bg-container').childNodes[1];
     // Set the title to that of the category
     titleElem.textContent += category;
-    document.getElementById("add-new").setAttribute("onclick", "window.location.href='../newText.html?category=" + category + "'")
+    document.getElementById("add-new").setAttribute("onclick", "window.location.href='../newText.html?category=" + category + "'");
     // Iterates through the users local storage, and calls for a button to be created for each text
+    addEditButton();
     loadButtons();
 }
 
@@ -64,11 +65,69 @@ function createButton(name, text, color) {
     button.setAttribute("id", name.replaceAll(" ", "_"));
     // Add the button class
     button.setAttribute("class", "button");
-
     // Adds the button to the categories container element
     document.getElementById("categories-container").appendChild(button);
 }
 
+function addEditButton(){
+    const edit = document.getElementById("edit");
+    edit.setAttribute("onclick", "window.location.href='editCategory.html?category=" + getCatName().replaceAll(" ", "_") + "'");
+}
+
+function editCategoryName(){
+    const newName = document.getElementById("cat_name").value;
+    if (newName.length === 0) {
+        document.getElementById("cat_name").setAttribute("placeholder", "This field is required");
+        return;
+    }
+    
+    let newColor = document.getElementById("cat_but_color").value;
+    
+    const current = getCatName();
+    if (newName === current){
+        document.getElementById("cat_name").value = "";
+        document.getElementById("cat_name").setAttribute("placeholder", "Cannot use the same name");
+        return;
+    }
+    const storage = {...localStorage};
+    for (let key in storage){
+        if (key.includes("category")) continue;
+        if (key.replaceAll("_", " ").includes(current)){
+            const json = JSON.parse(storage[key]);
+            json.cat = newName;
+            if (newColor !== undefined){
+                json["color"] = newColor;
+            }
+            localStorage.setItem("categories " + newName, JSON.stringify(json));
+            removeCategory(current);
+            updateTexts(current, newName);
+            window.location.href = "../categoryView.html?category=" + newName.replaceAll(" ", "_");
+        }
+    }
+}
+
+function removeCategory(name){
+    for (let key in localStorage){
+        if (key === "categories " + name){
+            localStorage.removeItem(key);
+        }
+    }
+}
+
+
+function updateTexts(category, newCategory){
+    console.log(`${category} : ${newCategory}`);
+    const storage = {...localStorage};
+    for (let key in storage){
+        if (key.includes("categories "))continue;
+        const json = JSON.parse(key);
+        if (json.hasOwnProperty("category") && (json["category"] === category)){
+            json["category"] = newCategory;
+            localStorage.removeItem(key);
+            localStorage.setItem(JSON.stringify(json), "true");
+        }
+    }
+}
 /**
  * Copy the text parameter to the users clipboard, and display a visual indication.
  * @param {*} text
@@ -185,5 +244,5 @@ function getCatName() {
     // Get the value of key "category"
     const category = urlParams.get('category');
     // Return the key without "_" characters
-    return category.replace("_", " ");
+    return category.replaceAll("_", " ");
 }

@@ -17,14 +17,11 @@ function addCategory() {
     }
     const json = '{"cat":"' + name + '", "color":"' + color + '"}';
 
-    localStorage.setItem("categories " + name.replaceAll(" ", "_"), json);
+    localStorage.setItem("categories " + name, json);
 
     //localStorage.setItem(name.replace(" ", "_"), "category");
     document.location.href = "../categories.html";
     createButtons();
-}
-
-function removeCategory(name) {
 }
 
 // Used in development phase to manually clear LocalStorage
@@ -70,5 +67,5 @@ function createButtons() {
 }
 
 function addButtonCookie(button) {
-    window.location.href = '../categoryView.html?category=' + button.textContent.toLowerCase().replace(" ", "_");
+    window.location.href = '../categoryView.html?category=' + button.textContent.replaceAll(" ", "_");
 }
