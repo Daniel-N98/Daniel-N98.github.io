@@ -26,7 +26,7 @@ function addCategory() {
 
 // Used in development phase to manually clear LocalStorage
 function deleteStorage() {
-    localStorage.clear();
+    //localStorage.clear();
     location.reload();
 }
 

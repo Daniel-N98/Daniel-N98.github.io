@@ -254,3 +254,36 @@ function getCatName() {
     // Return the key without "_" characters
     return category.replaceAll("_", " ");
 }
+
+function openDelete(){
+    const cat = getCatName();
+    window.location.href = '../deleteText.html?category=' + cat.replaceAll("_", " ");
+}
+
+function deleteText(){
+    const name = document.getElementById("text_name");
+    const indication = document.getElementById("indication");
+    const text = document.getElementById("text");
+    if (name.value === ""){
+        name.setAttribute("placeholder", "This field is required");
+        return;
+    }
+    text.textContent = name.value;
+    text.hidden = false;
+    indication.textContent = "";
+    const storage = {...localStorage};
+    for (let key in storage){
+        if (key.includes("categories "))continue;
+
+        const json = JSON.parse(key);
+        if (json["category"] === getCatName() && json["name"] === name.value){
+            localStorage.removeItem(key);
+            
+            indication.textContent += " was deleted.";
+            indication.hidden = false;
+            return;
+        }
+    }
+    indication.textContent += " was not found.";
+    indication.hidden = false;
+}
