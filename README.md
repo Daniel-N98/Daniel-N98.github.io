@@ -1,4 +1,4 @@
-[Daniel-N98.github.io](Daniel-N98.github.io)
+https://daniel-n98.github.io/
 
 # Copy and Paste Tool
 
