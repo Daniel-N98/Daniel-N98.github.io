@@ -26,6 +26,8 @@ Data for Categories, and Texts are stored in the users LocalStorage.
 
 
 ### To Do
+  - Allow **Categories** to be renamed [✓]
+  - Allow **Texts** to be delete [✓]
   - Allow **Texts** to be renamed [X]
   - Allow **Texts** copy text to be edited [X]
   - Allow **Texts** color to be edited [X]
