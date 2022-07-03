@@ -24,4 +24,6 @@ The "Text Name" & "Text To Copy" are required, and "Button Color" is again optio
 
 ### To Do
   - Allow **Texts** to be renamed [X]
+  - Allow **Texts** copy text to be edited [X]
+  - Allow **Texts** color to be edited [X]
   - Allow **Categories** to be deleted [X]
