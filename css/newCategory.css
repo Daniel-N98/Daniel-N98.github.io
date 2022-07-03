@@ -49,7 +49,7 @@ input:focus {
         font-size: 18px !important;
     }
 
-    p, span {
+    .input p, .small {
         font-size: 11px !important;
     }
 }
