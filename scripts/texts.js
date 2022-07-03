@@ -3,6 +3,7 @@
  */
 function openCategory() {
     const category = getCatName();
+    document.title += ` ${category}`;
     // Get the first child node of the #bg-container element
     const titleElem = document.querySelector('#bg-container').childNodes[1];
     // Set the title to that of the category
@@ -18,6 +19,14 @@ function openCategory() {
  */
 function updateName() {
     document.getElementById("cat_name").textContent = getCatName();
+}
+
+/**
+ * Updates the element which contains a warning to display the current category
+ */
+function updateWarning(){
+    const value = document.getElementById("warning").textContent;
+    document.getElementById("warning").textContent = value.replace("name", getCatName());
 }
 
 /**
@@ -95,7 +104,7 @@ function editCategoryName(){
         if (key.replaceAll("_", " ").includes(current)){
             const json = JSON.parse(storage[key]);
             json.cat = newName;
-            if (newColor !== undefined){
+            if (newColor !== ""){
                 json["color"] = newColor;
             }
             localStorage.setItem("categories " + newName, JSON.stringify(json));
