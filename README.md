@@ -1,6 +1,7 @@
 https://daniel-n98.github.io/
 
 # Copy and Paste Tool
+First attempt with HTML, CSS & JavaScript - huge refactor required.
 
 This is a basic website that allows users to easily find, and copy text to their clipboard.<br>
 Mainly aimed towards those in a Customer Service position, that frequently receive the same, or <br>
@@ -29,4 +30,6 @@ Data for Categories, and Texts are stored in the users LocalStorage.
   - Allow **Texts** copy text to be edited [X]
   - Allow **Texts** color to be edited [X]
   - Allow **Categories** to be deleted [X]
-  - Implement **Reset** feature to remove all **categories** and **Texts**
+  - Implement **Reset** feature to remove all **categories** and **Texts** [X]
+  - Refactor code [X]
+  - Update design [X]
