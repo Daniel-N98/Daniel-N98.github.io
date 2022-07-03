@@ -19,6 +19,8 @@ a **text** by clicking "Delete".
 Clicking "Add New" button will allow you to create a new **text** attached to this **category**.
 The "Text Name" & "Text To Copy" are required, and "Button Color" is again optional.
 
+Data for Categories, and Texts are stored in the users LocalStorage.
+
 
 
 
@@ -27,3 +29,4 @@ The "Text Name" & "Text To Copy" are required, and "Button Color" is again optio
   - Allow **Texts** copy text to be edited [X]
   - Allow **Texts** color to be edited [X]
   - Allow **Categories** to be deleted [X]
+  - Implement **Reset** feature to remove all **categories** and **Texts**
