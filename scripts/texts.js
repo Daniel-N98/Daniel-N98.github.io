@@ -222,7 +222,6 @@ function addNewText() {
     localStorage.setItem(json, "true");
     // Returns to the previous page
     history.back();
-    location.reload();
 }
 
 function checkName(textName){
