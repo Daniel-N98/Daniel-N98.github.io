@@ -142,6 +142,10 @@ function updateTexts(category, newCategory){
  * @param {*} text
  */
 async function copyText(text) {
+    // Displays a text indication that text has attempted to be copied
+    const hiddenPar = document.getElementById("hidden-indication");
+    // Displays the result of the operation, failed/succeeded
+    const hiddenStatus = document.getElementById("indication-cat");
     navigator.clipboard.writeText(text).then(() => {
         // Alter the result to indicate a successful copy
         hiddenStatus.textContent = "Succeded";
@@ -151,7 +155,8 @@ async function copyText(text) {
         hiddenStatus.textContent = "Failed!";
         console.log('Error whilst copying text: ', error);
     });
-    hiddenPar.hidden = false;
+
+    hiddenPar.hidden = false
     setTimeout(function () {
         // Removes the text indication after 5 seconds
         hiddenPar.hidden = true;
