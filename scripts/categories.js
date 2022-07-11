@@ -8,7 +8,7 @@ function addCategory() {
     }
     let color = document.getElementById("cat_but_color").value;
     if (color.length === 0) {
-        color = "";
+        color = getDefaultCatColor();
     }
     if (!checkCategory(name)){
         document.getElementById("cat_name").setAttribute("placeholder", "Category Name already exists");
@@ -47,7 +47,7 @@ function checkCategory(categoryName){
 function createButtons() {
     const storage = {...localStorage};
     for (let element in storage) {
-        if (element.includes("category")) continue;
+        if (element.includes("category") || element.includes("userSettings")) continue;
 
         const json = storage[element];
         const parsed = JSON.parse(json);

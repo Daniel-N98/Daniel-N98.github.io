@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/newCategory.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/categories.css">
-    <title>Copy and Paste Tool | New Category</title>
+    <title>Copy and Paste Tool | New Text</title>
 </head>
 <body>
 <div class="header">
@@ -15,26 +15,25 @@
     <h2 id="title">Copy and Paste Tool</h2>
 </div>
 <div id="bg-container">
-    <h3>Add New Category</h3>
+    <h3 class="medium">Settings</h3>
+    <p style="color:white; white-space: pre;text-align: center;" id="hidden-indication" hidden>Settings have been updated</p>
     <div id="option-buttons">
-        <button class="button" onclick="window.location.href='categories.html'" id="back">Back</button>
+        <button class="button" onclick="history.back()" id="back">Back</button>
     </div>
     <div id="categories-container">
         <div class="input">
-            <h3>Category Name</h3>
-            <p>The name to be displayed on the category button</p>
-            <input type="text" name="category_name" class="name" id="cat_name">
+            <h3>Default Category Color</h3>
+            <p>The default color of category buttons</p>
+            <input type="text" name="def_cat_color" class="name" id="def_cat_color">
         </div>
         <div class="input">
-            <h3>Button Color</h3>
-            <p>The color of this particular category button </p>
-            <input type="text" name="category_button_bolor" id="cat_but_color" placeholder="Leave blank for default">
+            <h3>Default Text Color</h3>
+            <p>The default color of text buttons</p>
+            <input type="text" name="def_text_color" class="name" id="def_text_color">
         </div>
-        <button class="button" onclick="addCategory()">Confirm</button>
+        <button class="button" onclick="updateSettings()">Confirm</button>
     </div>
 </div>
 </body>
-
-<script src="scripts/categories.js"></script>
 <script src="scripts/settings.js"></script>
 </html>

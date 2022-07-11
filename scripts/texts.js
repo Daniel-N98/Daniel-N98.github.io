@@ -37,7 +37,7 @@ function loadButtons() {
     const storage = {...localStorage};
     for (let key in storage) {
         // If the key includes "categories", continue to the next iteration.
-        if (key.includes("categories")) continue;
+        if (key.includes("categories") || key.includes("userSettings")) continue;
 
         // Parse the value of key into a JSON object.
         const jsonObj = JSON.parse(key);
@@ -148,7 +148,7 @@ async function copyText(text) {
     const hiddenStatus = document.getElementById("indication-cat");
     navigator.clipboard.writeText(text).then(() => {
         // Alter the result to indicate a successful copy
-        hiddenStatus.textContent = "Succeded";
+        hiddenStatus.textContent = "Succeeded";
         // Update the color of the result to a shade of green
         hiddenStatus.style.color = "#00ff40";
     }).catch(error => {
@@ -193,8 +193,8 @@ function addNewText() {
     }
 
     // Set color equal to an empty string if the string is undefined
-    if (color === undefined) {
-        color = "";
+    if (color.length === 0) {
+        color = getDefaultTextColor();
     }
 
     // Create the JSON strong from the text button values
@@ -210,7 +210,7 @@ function checkName(textName){
     const catName = getCatName();
     const storage = {...localStorage};
     for (let key in storage){
-        if (key.includes("categories")) continue;
+        if (key.includes("categories") || key.includes("userSettings")) continue;
 
         // Parse the value of key into a JSON object.
         const jsonObj = JSON.parse(key);

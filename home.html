@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Copy and Paste Tool | Home</title>
 </head>
-<body>
+<body onload="setDefaultSettings()">
 <div class="header">
     <h3 id="logo">Logo<span>Text</span></h3>
     <h2 id="title">Copy and Paste Tool</h2>
@@ -17,9 +17,10 @@
         <button class="button" onclick="window.location.href='categories.html'" id="categories">Categories
         </button>
         <button class="button" id="account">Account</button>
-        <button class="button" id="settings">Settings</button>
+        <button class="button"  onclick="window.location.href='settings.html'" id="settings">Settings</button>
         <button class="button" onclick="window.location.href='index.html'" id="sign-out">Sign out</button>
     </div>
 </div>
 </body>
+<script src="scripts/settings.js"></script>
 </html>
