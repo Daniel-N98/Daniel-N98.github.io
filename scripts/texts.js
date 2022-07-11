@@ -142,39 +142,16 @@ function updateTexts(category, newCategory){
  * @param {*} text
  */
 async function copyText(text) {
-    // Create a new input element to hold the text being copied
-    const input = document.createElement("input");
-    // Set the inputs text value equal to the text being copied
-    input.value = text;
-    // Set the position as "fixed"
-    input.style.position = "fixed";
-    // Move the element far off screen as not to be seen by the user
-    input.style.top = "-2000px";
-    // Append the child node
-    document.body.appendChild(input);
-
-    // Displays a text indication that text has attempted to be copied
-    const hiddenPar = document.getElementById("hidden-indication");
-    // Displays the result of the operation, failed/succeeded
-    const hiddenStatus = document.getElementById("indication-cat");
-
-    input.select();
-    try {
-        // Attempt to copy the text to the users clipboard
-        document.execCommand("copy");
+    navigator.clipboard.writeText(text).then(() => {
         // Alter the result to indicate a successful copy
         hiddenStatus.textContent = "Succeded";
         // Update the color of the result to a shade of green
         hiddenStatus.style.color = "#00ff40";
-    } catch (err) {
-        // Red color is applied by default, so no need to set it here to indicate a fail
-        // Alter the result to indicate a failed copy
+    }).catch(error => {
         hiddenStatus.textContent = "Failed!";
-    }
-    // Remove the child node we appended
-    document.body.removeChild(input);
-    // Remove the hidden attribute so the text indication is shown
-    hiddenPar.hidden = false
+        console.log('Error whilst copying text: ', error);
+    });
+    hiddenPar.hidden = false;
     setTimeout(function () {
         // Removes the text indication after 5 seconds
         hiddenPar.hidden = true;
