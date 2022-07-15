@@ -67,5 +67,5 @@ function createButtons() {
 }
 
 function addButtonCookie(button) {
-    window.location.href = '../categoryView.html?category=' + button.textContent.replaceAll(" ", "_");
+    window.location.href = 'categoryView.html?category=' + button.textContent.replaceAll(" ", "_");
 }

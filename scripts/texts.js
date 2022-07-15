@@ -8,7 +8,7 @@ function openCategory() {
     const titleElem = document.querySelector('#bg-container').childNodes[1];
     // Set the title to that of the category
     titleElem.textContent += category;
-    document.getElementById("add-new").setAttribute("onclick", "window.location.href='../newText.html?category=" + category + "'");
+    document.getElementById("add-new").setAttribute("onclick", "window.location.href='newText.html?category=" + category + "'");
     // Iterates through the users local storage, and calls for a button to be created for each text
     addEditButton();
     loadButtons();
@@ -110,7 +110,7 @@ function editCategoryName(){
             localStorage.setItem("categories " + newName, JSON.stringify(json));
             removeCategory(current);
             updateTexts(current, newName);
-            window.location.href = "../categoryView.html?category=" + newName.replaceAll(" ", "_");
+            window.location.href = "categoryView.html?category=" + newName.replaceAll(" ", "_");
         }
     }
 }
@@ -239,7 +239,7 @@ function getCatName() {
 
 function openDelete(){
     const cat = getCatName();
-    window.location.href = '../deleteText.html?category=' + cat.replaceAll("_", " ");
+    window.location.href = 'deleteText.html?category=' + cat.replaceAll("_", " ");
 }
 
 function deleteText(){
