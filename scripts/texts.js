@@ -193,7 +193,7 @@ function addNewText() {
     }
 
     // Set color equal to an empty string if the string is undefined
-    if (color.length === 0) {
+    if (color.length === 0 || color === '#') {
         color = getDefaultTextColor();
     }
 

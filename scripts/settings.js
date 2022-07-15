@@ -12,8 +12,6 @@ function replaceValue(value){
     localStorage.setItem('userSettings', JSON.stringify(value));
 }
 
-// Settings : {'def_cat_color:#817264', 'def_text_color:#fff'}
-
 /**
  * Retrieves the value at the Settings key in the users LocalStorage.
  * 
@@ -78,4 +76,11 @@ function updateSettings(){
     const hiddenIndication = document.getElementById("hidden-indication");
     hiddenIndication.textContent = result;
     hiddenIndication.hidden = false;
+}
+
+function addHashtag(element) {
+    var val = element.value;
+    if(!val.match(/^#/)) {
+        element.value = "#" + val;
+    }
 }
