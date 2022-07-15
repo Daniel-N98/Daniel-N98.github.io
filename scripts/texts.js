@@ -100,7 +100,7 @@ function editCategoryName(){
     }
     const storage = {...localStorage};
     for (let key in storage){
-        if (key.includes("category")) continue;
+        if (key.includes("category") || key === 'userSettings') continue;
         if (key.replaceAll("_", " ").includes(current)){
             const json = JSON.parse(storage[key]);
             json.cat = newName;
@@ -119,8 +119,37 @@ function removeCategory(name){
     for (let key in localStorage){
         if (key === "categories " + name){
             localStorage.removeItem(key);
+            removeTexts(name);
+            return true;
         }
     }
+    return false;
+}
+
+function removeTexts(category){
+    const storage = {...localStorage};
+    for (let element in storage){
+        if (element.includes("categories") || element === "userSettings") continue;
+        const json = JSON.parse(element);
+        if (json.category === category){
+            localStorage.removeItem(element);
+        }
+    }
+}
+
+function deleteCategory(){
+    const input = document.getElementById('cat_name').value;
+    const indication = document.getElementById("indication");
+    const show_name = document.getElementById("show_name");
+    let status = document.getElementById('status');
+    show_name.textContent = input;
+    
+
+    status.textContent = (removeCategory(input) 
+              ? "DELETED"
+              : "NOT FOUND");
+
+    indication.hidden = false;
 }
 
 
@@ -128,7 +157,7 @@ function updateTexts(category, newCategory){
     console.log(`${category} : ${newCategory}`);
     const storage = {...localStorage};
     for (let key in storage){
-        if (key.includes("categories "))continue;
+        if (key.includes("categories ") || key === 'userSettings')continue;
         const json = JSON.parse(key);
         if (json.hasOwnProperty("category") && (json["category"] === category)){
             json["category"] = newCategory;
@@ -255,7 +284,7 @@ function deleteText(){
     indication.textContent = "";
     const storage = {...localStorage};
     for (let key in storage){
-        if (key.includes("categories "))continue;
+        if (key.includes("categories ") || key === 'userSettings')continue;
 
         const json = JSON.parse(key);
         if (json["category"] === getCatName() && json["name"] === name.value){

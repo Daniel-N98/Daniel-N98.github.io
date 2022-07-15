@@ -28,7 +28,7 @@
         <div class="input">
             <h3>Update Color</h3>
             <p>The color of this particular category button</p>
-            <input type="text" name="category_button_bolor" id="cat_but_color" placeholder="(Leave empty to preserve current color)">
+            <input type="text" name="category_button_bolor" id="cat_but_color" onkeyup="addHashtag(this)" placeholder="(Leave empty to preserve current color)">
         </div>
         <p class="small" style="color: #47B5FF;">You are editing the [ <span class="small" id="warning" style="color: red; font-weight: bold;">name</span> ] category!</p>
         <button class="button" onclick="editCategoryName()">Confirm</button>
@@ -37,4 +37,5 @@
 </body>
 
 <script src="../scripts/texts.js"></script>
+<script src="../scripts/settings.js"></script>
 </html>

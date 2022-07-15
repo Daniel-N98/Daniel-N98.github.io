@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/newCategory.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/categories.css">
-    <title>Copy and Paste Tool | Delete Text</title>
+    <title>Copy and Paste Tool | Delete Category</title>
 </head>
 <body>
 <div class="header">
@@ -15,18 +15,19 @@
     <h2 id="title">Copy and Paste Tool</h2>
 </div>
 <div id="bg-container">
-    <h3>Delete Text</h3>
+    <h3>Delete Category</h3>
     <div id="option-buttons">
         <button class="button" onclick="history.back();" id="back">Back</button>
     </div>
     <div id="categories-container">
         <div class="input">
-            <h3>Enter Text Name to delete</h3>
+            <h3>Enter Category Name to delete</h3>
             <p style="color: red; margin-top: 10px;">This is permanent and <span style="font-weight: bold;">CANNOT be undone</span></p>
-            <input type="text" name="text_name" class="name" id="text_name" placeholder="Case Sensitive">
+            <input type="text" name="cat_name" class="name" id="cat_name" placeholder="Case Sensitive">
+            <p style="color: red; margin-top: 10px;">Any Texts within the Category will also be deleted!</p>
         </div>
-        <span id="text" style="color: red" hidden>text</span><p id="indication" hidden></p>
-        <button class="button" onclick="deleteText()">Confirm</button>
+        <p style='color:white;' id="indication" hidden>Category [ <span id="show_name" style="color:red;"></span> ] was <span id='status' style='color:red;'></span></p>
+        <button class="button" onclick="deleteCategory()">Confirm</button>
     </div>
 </div>
 </body>

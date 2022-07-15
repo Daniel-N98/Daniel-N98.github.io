@@ -20,14 +20,8 @@ function addCategory() {
     localStorage.setItem("categories " + name, json);
 
     //localStorage.setItem(name.replace(" ", "_"), "category");
-    document.location.href = "../categories.html";
+    document.location.href = "categories.html";
     createButtons();
-}
-
-// Used in development phase to manually clear LocalStorage
-function deleteStorage() {
-    //localStorage.clear();
-    location.reload();
 }
 
 function checkCategory(categoryName){
@@ -69,3 +63,5 @@ function createButtons() {
 function addButtonCookie(button) {
     window.location.href = 'categoryView.html?category=' + button.textContent.replaceAll(" ", "_");
 }
+
+
